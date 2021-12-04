@@ -15,6 +15,15 @@
   font-weight: bold;
 }
 
+.game {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.game-info li {
+  text-align: left;
+}
+
 
 
 

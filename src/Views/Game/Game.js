@@ -61,7 +61,10 @@ export default class Game extends Component {
     super(props);
     this.state = {
       history: [
-        { squares: Array(9).fill(null) },
+        {
+          squares: Array(9).fill(null),
+          pos: []
+        },
       ],
       xIsNext: true,
       stepNumber: 0,
@@ -76,7 +79,10 @@ export default class Game extends Component {
     squares[i] = this.state.xIsNext ? "X" : "O"
     this.setState({
       history: history.concat([
-        { squares }
+        {
+          squares,
+          pos: [parseInt(i / 3) + 1, i % 3 + 1] // [行, 列]
+        }
       ]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
@@ -113,13 +119,23 @@ export default class Game extends Component {
         <div className="game-info">
           <div>{ status }</div>
           <ol>
-            { history.map((item, index) => <li key={index}>
-              <button
-                onClick={() => this.jumpTo(index)}
+            { history.map((item, index) => (
+              <li
+                key={index}
+                style={{
+                  fontWeight: index === this.state.stepNumber ? "bold" : "normal",
+                  color: index === this.state.stepNumber ? "red" : "#333"
+                }}
               >
-                { index ? 'Go to move #' + index : 'Go to game start' }
-              </button>
-            </li>) }
+                { item.pos[0] } - { item.pos[1] },
+                <button
+                  style={{ marginLeft: "20px" }}
+                  onClick={() => this.jumpTo(index)}
+                >
+                  { index ? 'Go to move #' + index : 'Go to game start' }
+                </button>
+              </li>
+            )) }
           </ol>
         </div>
       </div>
