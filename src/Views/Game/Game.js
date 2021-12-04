@@ -1,20 +1,6 @@
 import { Component } from "react"
 import "./Game.css"
 
-/*
-class Square extends Component {
-  render() {
-    return (
-      <button
-        className={"square"}
-        onClick={this.props.onClick}
-      >
-        { this.props.value }
-      </button>
-    )
-  }
-}*/
-
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -103,13 +89,14 @@ export default class Game extends Component {
     const winner = calculateWinner(current.squares)
     let status
     if (winner) {
-      status = "Winner:" + winner
+      status = "Winner: " + winner
     } else {
       status = `Next player: ${ this.state.xIsNext ? "X" : "O" }`;
     }
 
     return (
       <div className="game">
+        <h3 className={"status"}>{ status }</h3>
         <div className="game-board">
           <Board
             squares={current.squares}
@@ -117,7 +104,6 @@ export default class Game extends Component {
           />
         </div>
         <div className="game-info">
-          <div>{ status }</div>
           <ol>
             { history.map((item, index) => (
               <li
@@ -127,12 +113,15 @@ export default class Game extends Component {
                   color: index === this.state.stepNumber ? "red" : "#333"
                 }}
               >
-                { item.pos[0] } - { item.pos[1] },
+                <div>
+                  <i className={"index"}>{ index + 1 }. </i>
+                  <span className={"pos"}>坐标：{ item.pos[0] } 行 - { item.pos[1] } 列</span>
+                </div>
                 <button
                   style={{ marginLeft: "20px" }}
                   onClick={() => this.jumpTo(index)}
                 >
-                  { index ? 'Go to move #' + index : 'Go to game start' }
+                  { index ? 'Go to move #' + index : 'Go to start' }
                 </button>
               </li>
             )) }

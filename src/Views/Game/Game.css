@@ -1,29 +1,67 @@
-.board {
-  width: 150px;
-  margin: 0 auto;
+.game {
+  width: calc(100% - 20px);
+  max-width: 600px;
+  margin: 10px auto;
+  background: url("../../assets/bg-l.gif");
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game .status {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.game .board {
+  width: 210px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.square {
+.game .board .square {
   box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  border: 1px solid #282c34;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #282c34;
   background-color: #fff;
   font-size: 24px;
   font-weight: bold;
 }
 
-.game {
-  width: 300px;
-  margin: 0 auto;
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 500px;
 }
 
-.game-info li {
-  text-align: left;
+.game .game-info li {
+  background: #000;
+  margin-top: 5px;
+  color: #fff;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
+.game .game-info li .index {
+  color: #f00;
+}
+
+.game .game-info li .pos {
+  color: #eee;
+  margin-left: 20px;
+}
+
+.game .game-info li button {
+  max-width: 120px;
+  width: 120px;
+}
 
 
 
