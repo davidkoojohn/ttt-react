@@ -114,7 +114,11 @@ export default class Game extends Component {
     if (winner) {
       status = "Winner: " + winner.value
     } else {
-      status = `Next player: ${ this.state.xIsNext ? "X" : "O" }`;
+      if (current.squares.every(item => !!item === true)) {
+        status = "No Winner!"
+      } else {
+        status = `Next player: ${ this.state.xIsNext ? "X" : "O" }`;
+      }
     }
 
     const moves = history.map((item, index) => (
