@@ -42,6 +42,23 @@ function Board(props) {
   </div>
 }
 
+function HistoryItem(props) {
+  const { index, pos, stepNumber, onClick } = props
+  const btnText = index ? 'Go to move #' + index : 'Go to start'
+
+  return (
+    <li className={index === stepNumber ? "active" : ""}>
+      <div>
+        { index > 0 && <>
+          <i className={"index"}>{ index }. </i>
+          <span className={"pos"}>POS：({ pos[0] }, { pos[1] })</span>
+        </>}
+      </div>
+      <button onClick={() => onClick(index)}>{ btnText }</button>
+    </li>
+  )
+}
+
 export default class Game extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +93,6 @@ export default class Game extends Component {
   }
 
   jumpTo(step) {
-    console.log(step)
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0
@@ -94,6 +110,16 @@ export default class Game extends Component {
       status = `Next player: ${ this.state.xIsNext ? "X" : "O" }`;
     }
 
+    const moves = history.map((item, index) => (
+      <HistoryItem
+        key={index}
+        pos={item.pos}
+        index={index}
+        stepNumber={this.state.stepNumber}
+        onClick={(step) => this.jumpTo(step)}
+      />)
+    )
+
     return (
       <div className="game">
         <h3 className={"status"}>{ status }</h3>
@@ -104,28 +130,7 @@ export default class Game extends Component {
           />
         </div>
         <div className="game-info">
-          <ol>
-            { history.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  fontWeight: index === this.state.stepNumber ? "bold" : "normal",
-                  color: index === this.state.stepNumber ? "red" : "#333"
-                }}
-              >
-                <div>
-                  <i className={"index"}>{ index + 1 }. </i>
-                  <span className={"pos"}>坐标：{ item.pos[0] } 行 - { item.pos[1] } 列</span>
-                </div>
-                <button
-                  style={{ marginLeft: "20px" }}
-                  onClick={() => this.jumpTo(index)}
-                >
-                  { index ? 'Go to move #' + index : 'Go to start' }
-                </button>
-              </li>
-            )) }
-          </ol>
+          <ol>{ moves }</ol>
         </div>
       </div>
     );

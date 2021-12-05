@@ -1,8 +1,11 @@
+body {
+  background: url("../../assets/bg-l.gif");
+}
+
 .game {
   width: calc(100% - 20px);
   max-width: 600px;
   margin: 10px auto;
-  background: url("../../assets/bg-l.gif");
   box-sizing: border-box;
   padding: 20px;
   display: flex;
@@ -43,19 +46,30 @@ ol {
   background: #000;
   margin-top: 5px;
   color: #fff;
-  padding: 5px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
 }
 
+.game .game-info li.active {
+  background-color: #eeeeee;
+  border: 1px solid #282c34;
+}
+
 .game .game-info li .index {
   color: #f00;
+  font-weight: bold;
 }
 
 .game .game-info li .pos {
   color: #eee;
   margin-left: 20px;
+}
+
+.game .game-info li.active .pos {
+  color: #282c34;
+  font-weight: bold;
 }
 
 .game .game-info li button {
