@@ -1,70 +1,8 @@
 import { Component } from "react"
 import "./Game.css"
+import { Board, HistoryItem } from "./components"
+import { calculateWinner } from "./tools"
 import logo from "../../assets/logo.svg";
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return {
-        value: squares[a],
-        line: lines[i]
-      };
-    }
-  }
-  return null;
-}
-
-function Square(props) {
-  return (
-    <button
-      className={ (props.bgRed ? "red" : "")+" square"}
-      onClick={ props.onClick }
-    >
-      { props.value }
-    </button>
-  )
-}
-
-function Board(props) {
-  return <div className={"board"}>
-    { props.squares.map((_, index) => (
-      <Square
-        value={ props.squares[index]}
-        onClick={() => props.onClick(index)}
-        key={index}
-        bgRed={props.line && props.line.includes(index)}
-      />
-    ))}
-  </div>
-}
-
-function HistoryItem(props) {
-  const { index, pos, stepNumber, onClick } = props
-  const btnText = index ? 'Go to move #' + index : 'Go to start'
-
-  return (
-    <li className={index === stepNumber ? "active" : ""}>
-      <div>
-        { index > 0 && <>
-          <i className={"index"}>{ index }. </i>
-          <span className={"pos"}>POS：({ pos[0] }, { pos[1] })</span>
-        </>}
-      </div>
-      <button onClick={() => onClick(index)}>{ btnText }</button>
-    </li>
-  )
-}
 
 export default class Game extends Component {
   constructor(props) {
@@ -154,5 +92,3 @@ export default class Game extends Component {
     );
   }
 }
-
-
