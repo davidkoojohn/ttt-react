@@ -70,6 +70,10 @@ body {
   font-weight: bold;
 }
 
+.game .board .square.red {
+  background-color: red;
+}
+
 ol {
   list-style: none;
   margin: 0;
