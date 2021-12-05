@@ -1,5 +1,6 @@
 import { Component } from "react"
 import "./Game.css"
+import logo from "../../assets/logo.svg";
 
 function calculateWinner(squares) {
   const lines = [
@@ -121,16 +122,22 @@ export default class Game extends Component {
     )
 
     return (
-      <div className="game">
-        <h3 className={"status"}>{ status }</h3>
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <ol>{ moves }</ol>
+      <div className="game-container">
+        <header className="game-header">
+          <img src={logo} className="logo" alt="logo" />
+          <span>Tic-Tac-Toe (三连棋)游戏</span>
+        </header>
+        <div className="game">
+          <h3 className={"status"}>{ status }</h3>
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <ol>{ moves }</ol>
+          </div>
         </div>
       </div>
     );
