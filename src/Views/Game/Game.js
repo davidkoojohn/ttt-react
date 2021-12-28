@@ -38,10 +38,11 @@ export default class Game extends Component {
   }
 
   jumpTo(step) {
-    this.setState({
+    this.setState(state => ({
       stepNumber: step,
-      xIsNext: (step % 2) === 0
-    })
+      xIsNext: (step % 2) === 0,
+      history: state.history.slice(0, step + 1)
+    }))
   }
 
   render() {
